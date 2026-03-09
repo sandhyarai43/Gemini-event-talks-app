@@ -1,0 +1,44 @@
+[
+  {
+    "title": "The Future of JavaScript Frameworks",
+    "speakers": ["Jane Doe"],
+    "categories": ["JavaScript", "Web Development"],
+    "duration": 60,
+    "description": "An in-depth look at the trends shaping the future of front-end development, and what to expect from major frameworks like React, Vue, and Svelte."
+  },
+  {
+    "title": "AI-Powered Code Generation",
+    "speakers": ["John Smith"],
+    "categories": ["AI", "Developer Tools"],
+    "duration": 60,
+    "description": "Discover how AI is changing the way we write code. This talk explores the latest tools and techniques for leveraging AI to boost productivity and code quality."
+  },
+  {
+    "title": "Securing Your Web Applications",
+    "speakers": ["Emily White", "David Green"],
+    "categories": ["Security", "Web Development"],
+    "duration": 60,
+    "description": "Learn the best practices for identifying and mitigating common security vulnerabilities in modern web applications. A must-attend for all developers."
+  },
+  {
+    "title": "State Management in Large-Scale Applications",
+    "speakers": ["Michael Black"],
+    "categories": ["JavaScript", "Architecture"],
+    "duration": 60,
+    "description": "A deep dive into advanced state management patterns for complex single-page applications. We'll compare different libraries and approaches."
+  },
+  {
+    "title": "The Rise of WebAssembly",
+    "speakers": ["Chris Blue"],
+    "categories": ["WebAssembly", "Performance"],
+    "duration": 60,
+    "description": "Explore the power of WebAssembly and how it's enabling near-native performance in the browser. We'll look at use cases and how to get started."
+  },
+  {
+    "title": "Designing Accessible and Inclusive Interfaces",
+    "speakers": ["Sarah Brown"],
+    "categories": ["UI/UX", "Accessibility"],
+    "duration": 60,
+    "description": "Learn how to create user interfaces that are usable by everyone, regardless of their abilities. This talk covers the principles of accessible design and practical implementation tips."
+  }
+]

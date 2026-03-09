@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Talks 2026</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            color: #333;
+            margin: 0;
+        }
+
+        header p {
+            font-size: 1.1em;
+            color: #666;
+        }
+
+        #search-container {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        #search-input {
+            width: 60%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 25px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+
+        #search-input:focus {
+            outline: none;
+            border-color: #4a90e2;
+            box-shadow: 0 0 8px rgba(74, 144, 226, 0.2);
+        }
+
+        #schedule {
+            margin-top: 20px;
+        }
+
+        .schedule-item {
+            padding: 25px;
+            margin-bottom: 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            background-color: #fff;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .schedule-item:hover {
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .schedule-item.break {
+            background-color: #4a90e2;
+            color: #fff;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        
+        .schedule-item.break .time {
+           font-weight: bold;
+        }
+
+        .schedule-item .time {
+            font-weight: 600;
+            font-size: 1.1em;
+            color: #4a90e2;
+            margin-bottom: 10px;
+        }
+
+        .schedule-item h2 {
+            font-size: 1.6em;
+            margin: 0 0 10px;
+            color: #333;
+        }
+
+        .schedule-item .speakers {
+            font-style: italic;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .schedule-item .categories {
+            margin-bottom: 15px;
+        }
+
+        .schedule-item .category {
+            display: inline-block;
+            background-color: #eef5fd;
+            color: #4a90e2;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            margin-right: 8px;
+        }
+
+        .schedule-item .description {
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Tech Talks 2026</h1>
+            <p>A one-day conference packed with exciting technical talks.</p>
+        </header>
+
+        <div id="search-container">
+            <input type="text" id="search-input" placeholder="Search by category (e.g., AI, JavaScript)...">
+        </div>
+
+        <main id="schedule">
+            <!-- Schedule will be dynamically generated here -->
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const scheduleContainer = document.getElementById('schedule');
+            const searchInput = document.getElementById('search-input');
+            const talks = [
+              {
+                "title": "The Future of JavaScript Frameworks",
+                "speakers": ["Jane Doe"],
+                "categories": ["JavaScript", "Web Development"],
+                "duration": 60,
+                "description": "An in-depth look at the trends shaping the future of front-end development, and what to expect from major frameworks like React, Vue, and Svelte."
+              },
+              {
+                "title": "AI-Powered Code Generation",
+                "speakers": ["John Smith"],
+                "categories": ["AI", "Developer Tools"],
+                "duration": 60,
+                "description": "Discover how AI is changing the way we write code. This talk explores the latest tools and techniques for leveraging AI to boost productivity and code quality."
+              },
+              {
+                "title": "Securing Your Web Applications",
+                "speakers": ["Emily White", "David Green"],
+                "categories": ["Security", "Web Development"],
+                "duration": 60,
+                "description": "Learn the best practices for identifying and mitigating common security vulnerabilities in modern web applications. A must-attend for all developers."
+              },
+              {
+                "title": "State Management in Large-Scale Applications",
+                "speakers": ["Michael Black"],
+                "categories": ["JavaScript", "Architecture"],
+                "duration": 60,
+                "description": "A deep dive into advanced state management patterns for complex single-page applications. We'll compare different libraries and approaches."
+              },
+              {
+                "title": "The Rise of WebAssembly",
+                "speakers": ["Chris Blue"],
+                "categories": ["WebAssembly", "Performance"],
+                "duration": 60,
+                "description": "Explore the power of WebAssembly and how it's enabling near-native performance in the browser. We'll look at use cases and how to get started."
+              },
+              {
+                "title": "Designing Accessible and Inclusive Interfaces",
+                "speakers": ["Sarah Brown"],
+                "categories": ["UI/UX", "Accessibility"],
+                "duration": 60,
+                "description": "Learn how to create user interfaces that are usable by everyone, regardless of their abilities. This talk covers the principles of accessible design and practical implementation tips."
+              }
+            ];
+
+            renderSchedule(talks);
+
+            // Search functionality
+            searchInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                const filteredTalks = talks.filter(talk => 
+                    talk.categories.some(category => category.toLowerCase().includes(searchTerm)) ||
+                    talk.title.toLowerCase().includes(searchTerm) ||
+                    talk.speakers.some(speaker => speaker.toLowerCase().includes(searchTerm))
+                );
+                renderSchedule(filteredTalks);
+            });
+
+            // Function to render the schedule
+            function renderSchedule(talksToRender) {
+                scheduleContainer.innerHTML = '';
+                let currentTime = new Date();
+                currentTime.setHours(10, 0, 0, 0); // Event starts at 10:00 AM
+
+                let talkCounter = 0;
+                
+                const allItems = [];
+
+                talks.forEach((talk) => {
+                    if (talksToRender.includes(talk)) {
+                        const item = { type: 'talk', data: talk };
+                        allItems.push(item);
+                    }
+                });
+
+                let lunchInserted = false;
+                if (allItems.length > 3) {
+                    allItems.splice(3, 0, { type: 'break', title: 'Lunch Break' });
+                    lunchInserted = true;
+                }
+
+                if (allItems.length > 0) {
+                    const firstTalkItem = allItems.find(item => item.type === 'talk');
+                    if (firstTalkItem) {
+                         const firstTalk = firstTalkItem.data;
+                         const originalIndex = talks.indexOf(firstTalk);
+
+                        if (originalIndex > 2 && !lunchInserted) {
+                             allItems.splice(0, 0, { type: 'break', title: 'Lunch Break' });
+                        }
+                    }
+                }
+
+                allItems.forEach((item, index) => {
+                    if (item.type === 'talk') {
+                        const startTime = new Date(currentTime);
+                        const endTime = new Date(startTime.getTime() + item.data.duration * 60000);
+
+                        const scheduleItem = createTalkElement(item.data, startTime, endTime);
+                        scheduleContainer.appendChild(scheduleItem);
+
+                        currentTime = new Date(endTime.getTime() + 10 * 60000); // 10 minute break
+                    } else if (item.type === 'break') {
+                        const breakStartTime = new Date(currentTime);
+                        const breakEndTime = new Date(breakStartTime.getTime() + 60 * 60000);
+                        const breakElement = createBreakElement(item.title, breakStartTime, breakEndTime);
+                        scheduleContainer.appendChild(breakElement);
+                        currentTime = new Date(breakEndTime.getTime() + 10 * 60000); // 10 minute break after break
+                    }
+                });
+            }
+
+            // Function to create a talk element
+            function createTalkElement(talk, startTime, endTime) {
+                const item = document.createElement('div');
+                item.classList.add('schedule-item');
+
+                item.innerHTML = `
+                    <div class="time">${formatTime(startTime)} - ${formatTime(endTime)}</div>
+                    <h2>${talk.title}</h2>
+                    <div class="speakers">By: ${talk.speakers.join(', ')}</div>
+                    <div class="categories">
+                        ${talk.categories.map(cat => `<span class="category">${cat}</span>`).join('')}
+                    </div>
+                    <p class="description">${talk.description}</p>
+                `;
+                return item;
+            }
+
+            // Function to create a break element
+            function createBreakElement(title, startTime, endTime) {
+                const item = document.createElement('div');
+                item.classList.add('schedule-item', 'break');
+                item.innerHTML = `
+                    <div class="time">${formatTime(startTime)} - ${formatTime(endTime)}</div>
+                    <div>${title}</div>
+                `;
+                return item;
+            }
+
+            // Function to format time as HH:MM AM/PM
+            function formatTime(date) {
+                return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            }
+        });
+    </script>
+</body>
+</html>
